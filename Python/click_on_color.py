@@ -5,6 +5,8 @@ import pyautogui as pag
 download_button_x = 1460
 download_button_y = 288
 
+# For Mac displays, the position must be doubled
+# See: https://stackoverflow.com/a/78200946
 transfer_bar_x = 1039 * 2
 transfer_bar_y = 346 * 2
 transfer_bar_color = (75, 157, 248)

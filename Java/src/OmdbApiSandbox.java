@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import com.google.gson.Gson;
 
-public class App {
+public class OmdbApiSandbox {
     public static void main(String[] args) throws Exception {
 
         Gson gson = new Gson();
@@ -13,14 +13,12 @@ public class App {
         Scanner keyboard = new Scanner(System.in);
         String userMovie = "";
 
-        System.out.print("Enter Movie Title: ");
+        System.out.print("Enter Movie Title (Q/q to quit): ");
         userMovie = keyboard.nextLine();
-        System.out.println(userMovie);
 
         while (!userMovie.equalsIgnoreCase("q")) {
             userMovie = userMovie.toLowerCase();
             userMovie = userMovie.replaceAll(" ", "+");
-            System.out.println(userMovie);
 
             try {
                 URL myURL = new URL("http://www.omdbapi.com/?apikey=fad4d002&type=movie&t=" + userMovie);
@@ -40,16 +38,40 @@ public class App {
                 System.out.println("IO Exception");
             }
 
-            System.out.println(keepInputLine);
-            Movie TOJS = gson.fromJson(keepInputLine, Movie.class);
-            System.out.println(TOJS);
+            MyMovie TOJS = gson.fromJson(keepInputLine, MyMovie.class);
+            System.out.println("Movie Info: " + TOJS);
             keepInputLine = "";
-            System.out.println(userMovie);
-            System.out.print("Enter Movie Title: ");
+            System.out.print("Enter Movie Title (Q/q to quit): ");
             userMovie = keyboard.nextLine();
-            System.out.println(userMovie);
         }
 
         keyboard.close();
+    }
+}
+
+class MyMovie {
+    private String Title;
+    private String Released;
+    private String Runtime;
+
+    MyMovie() {
+        Title = "";
+        Released = "";
+        Runtime = "";
+    }
+
+    MyMovie(String t, String rY, String r) {
+        Title = t;
+        Released = rY;
+        r = Runtime;
+    }
+
+    @Override
+    public String toString() {
+        String outString = "Title: " + Title + "; ";
+        outString += "Released: " + Released + "; ";
+        outString += "Runtime: " + Runtime + ";";
+
+        return outString;
     }
 }

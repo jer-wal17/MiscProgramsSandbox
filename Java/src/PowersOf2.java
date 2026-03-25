@@ -6,11 +6,11 @@ public class PowersOf2 {
         System.out.println("Enter a number to check for power of 2: ");
         int userNum = in.nextInt();
         in.nextLine();
-        int currPower = 1;
-        while (currPower < userNum) {
-            currPower *= 2;
+        int currPowerOfTwo = 1;
+        while (currPowerOfTwo < userNum) {
+            currPowerOfTwo *= 2;
         }
-        if (userNum == currPower) {
+        if (userNum == currPowerOfTwo) {
             System.out.println("Your number is a power of 2");
         } else {
             System.out.println("Your number is not a power of 2");

@@ -50,9 +50,9 @@ namespace delegates
             return results;
         }
 
-        static Func<int, int> FuncAddX = num => num + 1;
+        static Func<int, int> FuncAddX = (num) => num + 1;
 
-        static Func<int, int> FuncSubtractX = num => num - 1;
+        static Func<int, int> FuncSubtractX = (num) => num - 1;
 
         static int AddX(int num)
         {

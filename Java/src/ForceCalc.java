@@ -1,10 +1,7 @@
 import java.util.Scanner;
 
-public class ForceCalc
-{
-    @SuppressWarnings("resource")
-    public static void main(String[] args)
-    {
+public class ForceCalc {
+    public static void main(String[] args) {
         double mass;
         double velInit;
         double velFinal;
@@ -33,18 +30,18 @@ public class ForceCalc
         System.out.println("Delta U: " + delU);
         delDelU = calcDelDelU(mass, delU);
         System.out.println("Delta delta U: " + delDelU);
+
+        in.close();
     }
 
-    public static double calcDelK(double m, double vi, double vf)
-    {
+    public static double calcDelK(double m, double vi, double vf) {
         double delK = 0.0;
         delK = .5 * m * ((vf * vf) - (vi * vi));
         delK = Math.round(delK * 10000.0) / 10000.0;
         return delK;
     }
 
-    public static double calcDelDelK(double m, double vi, double vf, double dk)
-    {
+    public static double calcDelDelK(double m, double vi, double vf, double dk) {
         double delDelK = 0.0;
         double velFinalSq = vf * vf;
         double velInitSq = vi * vi;
@@ -55,16 +52,14 @@ public class ForceCalc
         return delDelK;
     }
 
-    public static double calcDelU(double m)
-    {
+    public static double calcDelU(double m) {
         double delU = 0.0;
         delU = m * 9.81 * .5;
         delU = Math.round(delU * 1000.0) / 1000.0;
         return delU;
     }
 
-    public static double calcDelDelU(double m, double du)
-    {
+    public static double calcDelDelU(double m, double du) {
         double delDelU = 0.0;
         delDelU = (m * 9.81 * .5005) - du;
         delDelU = Math.round(delDelU * 1000000.0) / 1000000.0;

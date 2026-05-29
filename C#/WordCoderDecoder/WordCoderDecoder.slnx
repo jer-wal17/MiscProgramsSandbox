@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="WordCoderDecoder.Tests/WordCoderDecoder.Tests.csproj" />
+  <Project Path="WordCoderDecoder/WordCoderDecoder.csproj" />
+</Solution>

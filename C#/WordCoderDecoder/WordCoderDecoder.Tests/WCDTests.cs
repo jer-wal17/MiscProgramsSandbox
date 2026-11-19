@@ -42,7 +42,7 @@ namespace WordCoderDecoder.Tests
 
         [Theory]
         [MemberData(nameof(CorrectDecodeData))]
-        public void TestWordDecoding(string chars, string strings, string wordToDecode, string expected)
+        public void TestWordDecodingSucceeds(string chars, string strings, string wordToDecode, string expected)
         {
             // Arrange
             var charList = chars.ToCharArray();
@@ -63,13 +63,50 @@ namespace WordCoderDecoder.Tests
             Assert.Equal(expected, result);
         }
 
+        [Theory]
+        [MemberData(nameof(IncorrectDecodeData))]
+        public void TestWordDecodingFails(string chars, string strings, string wordToDecode, string expected)
+        {
+            // Arrange
+            var charList = chars.ToCharArray();
+            var stringList = WordCoderDecoderDriver.TurnWordIntoStrings(strings);
+
+            Dictionary<char, string> testDictionary = charList.Zip(stringList, (character, stringLetter) => new { character, stringLetter })
+                                                              .ToDictionary(pair => pair.character, pair => pair.stringLetter);
+
+            WordCoderDecoderDriver wordCoderDecoderDriver = new()
+            {
+                LetterBank = testDictionary
+            };
+
+            // Act
+            string result = wordCoderDecoderDriver.DecodeWord(wordToDecode);
+
+            // Assert
+            Assert.NotEqual(expected, result);
+        }
+
         public static TheoryData<string, string, string, string> CorrectDecodeData
         {
             get
             {
                 var data = new TheoryData<string, string, string, string>
                 {
-                    { "AB", "12", "AB", "12" }
+                    { "AB", "12", "AB", "12" },
+                    { "CD", "34", "CD", "34" }
+                };
+
+                return data;
+            }
+        }
+
+        public static TheoryData<string, string, string, string> IncorrectDecodeData
+        {
+            get
+            {
+                var data = new TheoryData<string, string, string, string>
+                {
+                    { "AB", "12", "CD", "34" }
                 };
 
                 return data;
